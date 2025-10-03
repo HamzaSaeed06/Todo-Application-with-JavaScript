@@ -349,7 +349,7 @@ function lightMode(){
     getInput.setAttribute("style", "background-color: ; border-color: ; color:");
     getAddTask.setAttribute("style", "background-color: ; border-color:");
     getAddTask.firstElementChild.style.color = "";
-    insertbg.className = "main-div d-flex flex-column pt-4 h-100";
+    insertbg.className = "main-div";
     getDelAllBtn.setAttribute("style", "background-color:; border-color:");
     getDelAllBtn.firstElementChild.style.color = "";        
     getDelAllBtn.lastElementChild.style.color = "";
