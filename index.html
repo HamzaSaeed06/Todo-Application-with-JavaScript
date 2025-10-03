@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-div d-flex flex-column pt-4 " id="insertbg">
+      <div class="d-flex justify-content-end pb-4 px-4 w-100">
+        <div
+          class="dark-Mode d-flex justify-content-center align-items-center border border-1 rounded-2"
+          id="modes"
+        >
+          <i data-lucide="moon" id="dark-mode" onclick="darkMode()"></i>
+        </div>
+      </div>
+      <div
+        class="upper-div justify-content-around row gap-3 gap-lg-4 px-3 g-0 h-auto"
+        id="borders"
+
+      >
+        <div
+          class="upper-child border border-1 col-12 col-sm col-md col-lg py-1 px-3" onclick="showAllTask()"
+        >
+          <div
+            class="upper-child-left d-flex flex-column justify-content-center"
+          >
+            <p>Total Task</p>
+            <p id="totalTask">0</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i
+              data-lucide="book-check"
+              class="upper-box-icons"
+              color="#737373"
+            ></i>
+          </div>
+        </div>
+        <div
+          class="upper-child border border-1 col-12 col-sm-6 col-md-6 col-lg py-1 px-3" onclick="showCompletedTask()"
+        >
+          <div
+            class="upper-child-left d-flex flex-column justify-content-center"
+          >
+            <p>Completed</p>
+            <p id="completedTask">0</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i
+              data-lucide="circle-check"
+              class="upper-box-icons"
+              color="green"
+            ></i>
+          </div>
+        </div>
+        <div
+          class="upper-child border border-1 col-12 col-sm-6 col-md-6 col-lg py-1 px-3" onclick="showPendingTask()"
+        >
+          <div
+            class="upper-child-left d-flex flex-column justify-content-center"
+          >
+            <p>Pending</p>
+            <p>0</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i data-lucide="clock-3" class="upper-box-icons" color="orange"></i>
+          </div>
+        </div>
+        <div
+          class="upper-child border border-1 col-12 col-sm col-md col-lg py-1 px-3"
+        >
+          <div
+            class="upper-child-left d-flex flex-column justify-content-center"
+          >
+            <p>Progress</p>
+            <p>0%</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i
+              data-lucide="circle-dashed"
+              class="upper-box-icons"
+              color="blue"
+            ></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column gap-4 px-3 py-4 w-100" id="bottom-Data">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between w-100 gap-3"
+        >
+          <div class="gap-4 d-flex input-div w-auto w-lg-100">
+            <input
+              type="text"
+              name=""
+              id="todo"
+              class="border border-1"
+              placeholder="Add a todo..."
+            />
+            <button class="add border border-1" id="addTask" onclick="addTask()">
+              <i data-lucide="plus"></i>
+            </button>
+          </div>
+          <div
+            class="d-flex align-items-center justify-content-center gap-2 delete border border-1 px-5"
+            onclick="showDelPopUp()"
+            style="cursor: pointer;"
+            id="deleteALLBtn"
+          >
+            <p class="m-0 text-center">Delete All</p>
+            <i data-lucide="trash-2" height="18px"></i>
+          </div>
+        </div>
+
+        <div class="border border-1 rounded-3 w-100 flx">
+          <h4 class="py-3 px-3 m-0">Tasks</h4>
+          <div
+            class="menu row g-0 d-flex justify-content-between align-items-center py-2 rounded-top-1 border border-top-1 h-auto"
+          >
+            <div class="col-1 col-lg-1 ps-2 px-md-3 pe-lg-0"> 
+              <i data-lucide="check-line" class="tick"></i>
+            </div>
+            <div class="col-2  col-md-1 col-lg-1 px-3 px-md-0">
+              <p class=" fw-bolder m-0 task-para-text">S.No</p>
+            </div>
+            <div class="col-4 col-lg-5 px-2">
+              <p class="fw-bolder m-0 task-para-text">Todo</p>
+            </div>
+            <div class="col-2 col-lg-2 d-none d-md-block">
+              <p class="fw-bolder m-0 task-para-text">Date</p>
+            </div>
+            <div class="col-3 col-md-2 col-lg-2 px-0 px-md-3">
+              <p class="fw-bolder m-0 task-para-text">Status</p>
+            </div>
+            <div class="col-2 col-lg-1 ps-0 pe-1 px-md-4 px-lg-0">
+              <p class="fw-bolder m-0 task-para-text">Option</p>
+            </div>
+          </div>
+           <!--<div class="row g-0 align-items-center py-2 border-bottom h-auto">
+            <div class="col-1 col-lg-1 ps-2 px-md-3 tick-main d-flex">
+              <div class="cbx d-flex justify-content-center align-items-center">
+                <input type="checkbox" onclick="getCheck()" value="Completed" id="check" />
+                <label></label>
+                <svg class="tick-svg" viewbox="0 0 15 14" fill="none">
+                  <path d="M2 8.36364L6.23077 12L13 2"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="col-2 col-lg-1">
+              <p class="px-3 fw-bolder m-0 task-para-text">1</p>
+            </div>
+            <div class="col-4 col-lg-6 px-2">
+              <p class="fw-bolder m-0 p-0 pe-md-4 task-para-text">
+                Lorem ipsum dolor sitic reprehenderit repudiandae pariatur.
+              </p>
+            </div>
+            <div class="col-2 col-lg-2 d-none d-md-block">
+              <p class="fw-bolder m-0 task-para-text">Sat, Sep 6, 2025</p>
+            </div>
+            <div class="col-3 col-lg-1">
+              <p class="fw-bolder m-0 task-para-text">completed</p>
+            </div>
+            <div class="col-2 col-lg-1 px-3">
+               <div class="menu-Body ">
+                <i class="menu-btn del-edit-svg" data-lucide="ellipsis-vertical"></i>
+                <ul class="menu-option fw-bolder">
+                  <li>Edit</li>
+                  <li>Delete</li>
+                </ul>
+               </div>
+             </div>
+          </div> -->
+          
+          <div id="task-bar-menu" class="for-Task-scroll"></div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column gap-4 px-3 py-4 w-100 h-100" style="display: none !important;" id="completed-Data">
+       
+
+        <div class="task-bar-div border border-1 h-100 w-100">
+          <h4 class="py-3 px-3 m-0">Completed Tasks</h4>
+          <div
+            class="menu row g-0 align-items-center py-2 rounded-top-1 border border-top-1 px-2 px-sm-2"
+          >
+            <div class="col-1 col-lg-1">
+              <p class="px-2 fw-bolder m-0 task-para-text">S.No</p>
+            </div>
+            <div class="col-6 col-lg-7 px-3">
+              <p class="fw-bolder m-0 task-para-text"> todo</p>
+            </div>
+            <div class="col-2 col-lg-2">
+              <p class="fw-bolder m-0 task-para-text">Date</p>
+            </div>
+            <div class="col-3 col-lg-2 ps-1 pe-2 px-sm-3">
+              <p class="fw-bolder m-0 task-para-text">Status</p>
+            </div>
+          </div>
+          <div id="Completed-bar-menu" class="for-Task-scroll"></div>
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-column gap-4 px-3 py-4 w-100 h-100" style="display: none !important;" id="pending-Data">
+       
+
+        <div class="task-bar-div border border-1 h-100 w-100">
+          <h4 class="py-3 px-3 m-0">Pending Tasks</h4>
+          <div
+            class="menu row g-0 align-items-center py-2 rounded-top-1 border border-top-1 px-0 px-sm-1"
+          >
+            <div class="col-2 col-lg-1">
+              <p class="px-3 fw-bolder m-0 task-para-text">S.No</p>
+            </div>
+            <div class="col-5 col-lg-7">
+              <p class="fw-bolder m-0 task-para-text"> todo</p>
+            </div>
+            <div class="col-2 col-lg-2 task-para-text">
+              <p class="fw-bolder m-0">Date</p>
+            </div>
+            <div class="col-3 col-lg-2 task-para-text">
+              <p class="fw-bolder m-0">Status</p>
+            </div>
+          </div>
+          <div id="Pending-bar-menu" class="h-100"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- // delete pop up -->
+
+     <div class="g-0 del-pop-up" id="delpopup">
+      <div class="task-retained-overlay"></div>
+      <div class="task-retained-body border border-1 rounded-4 col-11 col-sm-8 col-md-6 col-lg-5 col-xl-3  pb-5 px-3 px-lg-4">
+        <div class="cross pb-4 pt-3 d-flex justify-content-end">
+        <i data-lucide="x" style="cursor: pointer;" onclick="hideDelPopUp()"></i>
+        </div>
+        <!-- <p class="fw-semibold task-done-para text-center">Marked as Completed!</p> -->
+        <p class="fw-semibold task-incomplete-para m-0 text-center">Delete all tasks?</p>
+        <div class="pt-4 d-flex justify-content-evenly w-100">
+          <a href="javascript:void(0)" class="incomplete d-flex justify-content-center align-items-center fw-bolder border border-1 rounded-3 text-decoration-none px-4 py-1" onclick="delTaskAll()">Delete All</a>
+          <a href="javascript:void(0)" onclick="hideDelPopUp()" class="goback  d-flex justify-content-center align-items-center fw-bolder border border-1 rounded-3 text-decoration-none px-4 py-1">CANCEL</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- // incomplete pop up -->
+
+    <div class="g-0 task-pop-up" id="taskpopup">
+      <div class="task-retained-overlay"></div>
+      <div class="task-retained-body border border-1 rounded-4 col-11 col-sm-8 col-md-6 col-lg-5 col-xl-4  pb-5 px-3 px-lg-4">
+        <div class="cross pb-4 pt-3 d-flex justify-content-end">
+        <i data-lucide="x" style="cursor: pointer;" onclick="hidePopUp()"></i>
+        </div>
+        <!-- <p class="fw-semibold task-done-para text-center">Marked as Completed!</p> -->
+        <p class="fw-semibold task-incomplete-para m-0 text-center">Do you want to mark it as incomplete?</p>
+        <div class="pt-4 d-flex justify-content-evenly w-100">
+          <a href="javascript:void(0)" class="incomplete d-flex justify-content-center align-items-center fw-bolder border border-1 rounded-3 text-decoration-none px-4 py-1">INCOMPLETE</a>
+          <a href="javascript:void(0)" onclick="hidePopUp()" class="goback  d-flex justify-content-center align-items-center fw-bolder border border-1 rounded-3 text-decoration-none px-4 py-1">CANCEL</a>
+        </div>
+      </div>
+    </div>
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="4"
+            result="blur"
+          ></feGaussianBlur>
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  
+                0 1 0 0 0  
+                0 0 1 0 0  
+                0 0 0 22 -7"
+            result="goo"
+          ></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+  </body>
+
+  <script src="./app.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</html>
