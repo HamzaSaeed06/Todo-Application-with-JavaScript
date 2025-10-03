@@ -2,11 +2,11 @@ var totalTask = document.getElementById("totalTask");
 var completedTask = document.getElementById("completedTask");
 var taskMenuParent = document.getElementById("task-bar-menu");
 var getCompleteDiv = document.getElementById("Completed-bar-menu");
-var getPendingDiv = document.getElementById("Pending-bar-menu")
+var getPendingDiv = document.getElementById("Pending-bar-menu");
 
 function addTask(j){
     var todo = document.getElementById("todo");
-    var todoText = todo.value.trim()
+    var todoText = todo.value.trim();
     var idGenerate = Math.random();
 
     var date = new Date();
@@ -21,19 +21,18 @@ function addTask(j){
 
     var completeDate = getNameOfDay + ", " + getNameOfMonth + " " + getDate + ", "  + getYear;
     
-    // console.log(j)
     if(todoText !== "" && j != undefined){
         document.getElementById(j).firstElementChild.innerText = todoText;
-        todo.value = ""
+        todo.value = "";
         var getAddTask = document.getElementById("addTask");
-        getAddTask.setAttribute("onclick", "addTask()")
+        getAddTask.setAttribute("onclick", "addTask()");
     }
-    else if(todoText !== ""){
+    else 
+        if(todoText !== ""){
 
     // create main body
 
     var mainBodyId = "taskMenu" + idGenerate;
-    console.log(mainBodyId)
     var taskMenuBody = document.createElement("div");
     taskMenuBody.className = "row g-0 align-items-center py-2 border-bottom h-auto";
     taskMenuBody.id = mainBodyId;
@@ -49,7 +48,7 @@ function addTask(j){
     var checkBoxId = "CheckBoxId" + idGenerate;
     var checkBodyDiv = document.createElement("div");
     checkBodyDiv.id = checkBoxId;
-    checkBodyDiv.className = "col-1 col-lg-1 ps-2 px-md-3 pe-lg-0 tick-main d-flex"
+    checkBodyDiv.className = "col-1 col-lg-1 ps-2 px-md-3 pe-lg-0 tick-main d-flex";
     getTaskMenu.appendChild(checkBodyDiv);
 
     var createCheck = document.createElement("div");
@@ -98,7 +97,7 @@ function addTask(j){
 
     var serialDiv = document.getElementById(serialId);
     var serialPara = document.createElement("p");
-    serialPara.className = "px-3 px-md-0 ps-lg-0 task-para-text fw-bolder m-0"
+    serialPara.className = "px-3 px-md-0 ps-lg-0 task-para-text fw-bolder m-0";
     serialPara.textContent = taskMenuParent.children.length;
     serialDiv.appendChild(serialPara);    
 
@@ -134,7 +133,7 @@ function addTask(j){
 
     var dateDiv = document.getElementById(dateId);
     var datePara = document.createElement("p");
-    datePara.className = "fw-bolder task-para-text m-0"
+    datePara.className = "fw-bolder task-para-text m-0";
     datePara.textContent = completeDate;
     dateDiv.appendChild(datePara);
     
@@ -152,13 +151,13 @@ function addTask(j){
     var statusChildid = "statusChild" + idGenerate;
     var createStatusChild = document.createElement("div");
     createStatusChild.id = statusChildid;
-    createStatusChild.className = "border border-1 rounded-2 pendingBox"
+    createStatusChild.className = "border border-1 rounded-2 pendingBox";
     var statusDiv = document.getElementById(statusId);
     statusDiv.appendChild(createStatusChild);
 
     var statusChild = document.getElementById(statusChildid);
     var statusPara = document.createElement("p");
-    statusPara.className = "fw-bolder task-para-text text-center m-0"
+    statusPara.className = "fw-bolder task-para-text text-center m-0";
     statusPara.textContent = "PENDING";
     statusChild.appendChild(statusPara);
 
@@ -180,7 +179,7 @@ function addTask(j){
     var createOptionDivChild = document.createElement("div");
     createOptionDivChild.className = "menu-Body";
     createOptionDivChild.id = createOptionDivChildId;
-    var getOptionDiv = document.getElementById(optionDivId)
+    var getOptionDiv = document.getElementById(optionDivId);
     getOptionDiv.appendChild(createOptionDivChild);
     
     // create option Btn
@@ -199,7 +198,7 @@ function addTask(j){
     getOptionChild.appendChild(list);
 
     var getList = document.getElementById(listId);
-    getList.innerHTML = " <li class='task-para-text' onclick=\"edit('" + taskId + "', '" + listId + "')\">Edit</li><li class='task-para-text' onclick=deleteTask('"+mainBodyId+"')>Delete</li>"
+    getList.innerHTML = " <li class='task-para-text' onclick=\"edit('" + taskId + "', '" + listId + "')\">Edit</li><li class='task-para-text' onclick=deleteTask('"+mainBodyId+"')>Delete</li>";
     list.style.display = "none";
 
     todo.value = "";
@@ -248,9 +247,26 @@ var getDelAllBtn = document.getElementById("deleteALLBtn");
 var getBottomBody = document.getElementById("bottom-Data");
 var getTaskBody = document.getElementById("task-bar-menu");
 
+// for completed task 
+
+var getCompleteBody = document.getElementById("completed-Data");
+var getCompletedMenu = getCompleteBody.firstElementChild.firstElementChild.nextElementSibling;
+var getComTaskBody = getCompleteBody.lastElementChild.lastElementChild;
+
+// for pending menu
+
+var getPendingBody = document.getElementById("pending-Data");
+var getPendingMenu = getPendingBody.firstElementChild.firstElementChild.nextElementSibling;
+
+// for footer
+
+var footerBody = document.getElementById("footer");
+
 function darkMode(){
-    darkButton.innerHTML = "<i data-lucide='sun' id='light-mode' height='22' onclick='lightMode()'></i>";
+    darkButton.innerHTML = "<i data-lucide='sun' id='light-mode' class='dark-light-size' width='17' height='17' onclick='lightMode()'></i>";
     lucide.createIcons();
+
+    // for all task
     insertbg.className += " insert-bg";
     darkButton.setAttribute("style", "border-color: #4d4d4d !important");
     getInput.setAttribute("style", "background-color: #111827; border-color: #182a52ff !important; color: rgb(201, 201, 201) ");
@@ -259,35 +275,75 @@ function darkMode(){
     getDelAllBtn.setAttribute("style", "background-color: #111827; border-color: #182a52ff !important");
     getDelAllBtn.firstElementChild.style.color = "#10337fff";
     getDelAllBtn.lastElementChild.style.color = "#10337fff";
-    getBottomBody.lastElementChild.setAttribute("style", "border-color: #4d4d4d !important")
-    getBottomBody.lastElementChild.firstElementChild.style.color = "rgb(201, 201, 201)"
+    getBottomBody.lastElementChild.setAttribute("style", "border-color: #4d4d4d !important");
+    getBottomBody.lastElementChild.firstElementChild.style.color = "rgb(201, 201, 201)";
     var getTaskHeadingMenu = getBottomBody.firstElementChild.nextElementSibling.firstElementChild.nextElementSibling;
     getTaskHeadingMenu.setAttribute("style", "border-color: #4d4d4d !important");
     for(var i = 0; i < getTaskHeadingMenu.children.length; i++){
-        getTaskHeadingMenu.children[i].firstElementChild.style.color = "rgb(201, 201, 201)"
+        getTaskHeadingMenu.children[i].firstElementChild.style.color = "rgb(201, 201, 201)";
     }
 
-
-    console.log(getTaskBody.children);
     for(var i = 0; i < getTaskBody.children.length; i++){
         getTaskBody.children[i].setAttribute("style", "border-color: #4d4d4d !important; color: rgb(201, 201, 201) !important");
-        console.log(getTaskBody.children[i]);
     }
     darkButton.firstElementChild.style.color = "white"
     for(var i = 0; i < borbgContTop.children.length; i++){
         borbgContTop.children[i].className += " borderbgConTop";
     }
+
+    /////////////////
+
+    // for completed task 
+
+    getCompleteBody.firstElementChild.setAttribute("style", "border-color: #4d4d4d !important");
+    getCompleteBody.firstElementChild.firstElementChild.style.color = "rgb(201, 201, 201)";
+    getCompletedMenu.setAttribute("style", "border-color: #4d4d4d !important");
+
+    for(var i = 0; i < getCompletedMenu.children.length; i++){
+        getCompletedMenu.children[i].firstElementChild.style.color = "rgb(201, 201, 201)";
+    }
+
+
+    for(var i = 0; i < getComTaskBody.children.length; i++){
+        getComTaskBody.children[i].setAttribute("style", "border-color: #4d4d4d !important; color: rgb(201, 201, 201) !important");
+        console.log(getComTaskBody.children[i]);
+    }
+    //////////////////
+
+    // for pendings task
+
+    getPendingBody.firstElementChild.setAttribute("style", "border-color: #4d4d4d !important");
+    getPendingBody.firstElementChild.firstElementChild.style.color = "rgb(201, 201, 201)";
+    getPendingMenu.setAttribute("style", "border-color: #4d4d4d !important");
+
+    for(var i = 0; i < getPendingMenu.children.length; i++){
+        getPendingMenu.children[i].firstElementChild.style.color = "rgb(201, 201, 201)";
+    }
+
+    // for progress task
+
+    var getProgressBody = document.getElementById("progress-Data");
+    var getProgressMenu = getProgressBody.firstElementChild.firstElementChild.nextElementSibling;
+    var getProgTaskBody = getProgressBody.lastElementChild.lastElementChild;
+
+    getProgressBody.firstElementChild.setAttribute("style", "border-color: #4d4d4d !important");
+    getProgressBody.firstElementChild.firstElementChild.style.color = "rgb(201, 201, 201)";
+    getProgressMenu.setAttribute("style", "border-color: #4d4d4d !important");
+
+    for(var i = 0; i < getProgressMenu.children.length; i++){
+        getProgressMenu.children[i].firstElementChild.style.color = "rgb(201, 201, 201)";
+    }
+
+    // for footer
+
+    footerBody.firstElementChild.style.color = "rgb(201, 201, 201)";
+    footerBody.style.backgroundColor = "#0E121B";
+    footerBody.lastElementChild.setAttribute("src", "./assets/signWhite.svg");
 }
 
 
 function lightMode(){
-    // var darkButton = document.getElementById("modes");
-    // var getInput = document.getElementById("todo");
-    // var getAddTask = document.getElementById("addTask");
-    // var getDelAllBtn = document.getElementById("deleteALLBtn");
-    // var getBottomBody = document.getElementById("bottom-Data");
-    // var getTaskBody = document.getElementById("task-bar-menu");
-    darkButton.innerHTML = " <i data-lucide='moon' id='dark-mode' onclick='darkMode()'></i>";
+    darkButton.innerHTML = " <i data-lucide='moon' id='dark-mode' class='dark-light-size' width='19' height='19' onclick='darkMode()'></i>";
     lucide.createIcons();
     darkButton.setAttribute("style", "border-color: ");
     getInput.setAttribute("style", "background-color: ; border-color: ; color:");
@@ -297,11 +353,10 @@ function lightMode(){
     getDelAllBtn.setAttribute("style", "background-color:; border-color:");
     getDelAllBtn.firstElementChild.style.color = "";        
     getDelAllBtn.lastElementChild.style.color = "";
-    getBottomBody.lastElementChild.setAttribute("style", "")
+    getBottomBody.lastElementChild.setAttribute("style", "");
     getBottomBody.lastElementChild.firstElementChild.style.color = "";
 
     var getTaskHeadingMenu = getBottomBody.firstElementChild.nextElementSibling.firstElementChild.nextElementSibling;
-    console.log(getTaskHeadingMenu)
     getTaskHeadingMenu.setAttribute("style", "border-color:");
     for(var i = 0; i < getTaskHeadingMenu.children.length; i++){
         getTaskHeadingMenu.children[i].firstElementChild.style.color = "";
@@ -317,13 +372,53 @@ function lightMode(){
     var borclasses = borderClassChild.classList;
     var lastClass = borclasses[borclasses.length - 1];
     borclasses.remove(lastClass);
-
-    // var borderClassChild = borbgContTop.children[i];
-    // var borclasses = borderClassChild.className.split(" ");
-    // borclasses.splice(-1, 1);
-    // borderClassChild.className = borclasses.join(" ")
-
     }
+
+    // for completed task 
+
+    getCompleteBody.firstElementChild.setAttribute("style", "border-color:");
+    getCompleteBody.firstElementChild.firstElementChild.style.color = "";
+    getCompletedMenu.setAttribute("style", "border-color: ");
+
+    for(var i = 0; i < getCompletedMenu.children.length; i++){
+        getCompletedMenu.children[i].firstElementChild.style.color = "";
+    }
+
+    for(var i = 0; i < getComTaskBody.children.length; i++){
+        getComTaskBody.children[i].setAttribute("style", "border-color: ; color:");
+        console.log(getComTaskBody.children[i]);
+    }
+    //////////////////
+
+    // for pendings task
+
+    getPendingBody.firstElementChild.setAttribute("style", "border-color:");
+    getPendingBody.firstElementChild.firstElementChild.style.color = "";
+    getPendingMenu.setAttribute("style", "border-color:");
+
+    for(var i = 0; i < getPendingMenu.children.length; i++){
+        getPendingMenu.children[i].firstElementChild.style.color = ""
+    }
+
+    // for progress task
+
+    var getProgressBody = document.getElementById("progress-Data");
+    var getProgressMenu = getProgressBody.firstElementChild.firstElementChild.nextElementSibling;
+    var getProgTaskBody = getProgressBody.lastElementChild.lastElementChild;
+
+    getProgressBody.firstElementChild.setAttribute("style", "border-color: ");
+    getProgressBody.firstElementChild.firstElementChild.style.color = "";
+    getProgressMenu.setAttribute("style", "border-color: ");
+
+    for(var i = 0; i < getProgressMenu.children.length; i++){
+        getProgressMenu.children[i].firstElementChild.style.color = "";
+    }
+
+    // for footer
+
+    footerBody.firstElementChild.style.color = "";
+    footerBody.style.backgroundColor = "";
+    footerBody.lastElementChild.setAttribute("src", "./assets/sign3.svg");
 }
 
 // check if check box is checked or not
@@ -365,12 +460,13 @@ function getCheck(a, v){
             getCompleteDiv.children[i].firstElementChild.remove();
             getCompleteDiv.children[i].lastElementChild.remove();
             getCompleteDiv.children[i].firstElementChild.nextElementSibling.nextElementSibling.innerText = completeDate;
-            getCompleteDiv.children[i].className = "row g-0 align-items-center py-2 border-bottom h-auto px-0 px-sm-2"
-            getCompleteDiv.children[i].firstElementChild.className = "col-1 col-lg-1"
-            getCompleteDiv.children[i].firstElementChild.firstElementChild.className = "px-3 px-sm-2 task-para-text fw-bolder m-0"
-            getCompleteDiv.children[i].firstElementChild.nextElementSibling.className = "col-6 col-lg-7 px-3"
-            getCompleteDiv.children[i].firstElementChild.nextElementSibling.nextElementSibling.className = "col-2 col-lg-2 task-para-text fw-bolder"
-            getCompleteDiv.children[i].lastElementChild.className = "col-3 col-lg-2 ps-1 pe-2 px-sm-3 pe-xl-5"
+            getCompleteDiv.children[i].className = "row g-0 align-items-center py-2 border-bottom h-auto px-0 px-sm-2";
+            getCompleteDiv.children[i].firstElementChild.className = "col-1 col-lg-1 task-para-text";
+            getCompleteDiv.children[i].firstElementChild.firstElementChild.className = "ps-3 pe-4 px-sm-2 fw-bolder m-0";
+            getCompleteDiv.children[i].firstElementChild.nextElementSibling.className = "col-6 col-lg-7 task-para-text ps-4 ps-sm-3 px-3";
+            getCompleteDiv.children[i].firstElementChild.nextElementSibling.firstElementChild.className = "fw-bolder m-0 ps-2 ps-sm-3 pe-md-4";
+            getCompleteDiv.children[i].firstElementChild.nextElementSibling.nextElementSibling.className = "col-2 col-lg-2 task-para-text fw-bolder";
+            getCompleteDiv.children[i].lastElementChild.className = "col-3 col-lg-2 task-para-text ps-0 pe-2 px-sm-3 pe-xl-5";
             getCompleteDiv.children[i].firstElementChild.firstElementChild.innerText = getCompleteDiv.children.length;
             }
         }
@@ -381,8 +477,8 @@ function getCheck(a, v){
         if(getId.dataset.locked === "true"){
         getId.checked = true;
         var popUpBody = document.getElementById("taskpopup");
-        popUpBody.style.display = "block"
-        popUpBody.lastElementChild.lastElementChild.firstElementChild.setAttribute("onclick" , "popTaskIncomplete('" + a + "' , '" + v + "')")
+        popUpBody.style.display = "block";
+        popUpBody.lastElementChild.lastElementChild.firstElementChild.setAttribute("onclick" , "popTaskIncomplete('" + a + "' , '" + v + "')");
         }
         
         isComplete = "notComplete";
@@ -395,8 +491,8 @@ function popTaskIncomplete(b, o){
     var getCheckBody = document.getElementById(b);
     getCheckBody.checked = false;
     var popUpBody = document.getElementById("taskpopup");
-    popUpBody.style.display = "none"
-    getCheckBody.parentNode.parentNode.parentNode.lastElementChild.previousElementSibling.firstElementChild.className = "border border-1 rounded-2 pendingBox"
+    popUpBody.style.display = "none";
+    getCheckBody.parentNode.parentNode.parentNode.lastElementChild.previousElementSibling.firstElementChild.className = "border border-1 rounded-2 pendingBox";
     getCheckBody.parentNode.parentNode.parentNode.lastElementChild.previousElementSibling.firstElementChild.firstElementChild.innerText = "PENDING";
 
     var getCompleteDiv = document.getElementById("Completed-bar-menu");
@@ -408,7 +504,7 @@ function popTaskIncomplete(b, o){
 
     var serialNumber = 1;
     for(var i = 0; i < getCompleteDiv.children.length; i++){
-        getCompleteDiv.children[i].firstElementChild.firstElementChild.innerText = serialNumber++
+        getCompleteDiv.children[i].firstElementChild.firstElementChild.innerText = serialNumber++;
     }
     completedTask.innerText--;
 }
@@ -417,7 +513,7 @@ function popTaskIncomplete(b, o){
 
 function hidePopUp(){
     var popUpBody = document.getElementById("taskpopup");
-    popUpBody.style.display = "none"
+    popUpBody.style.display = "none";
 }
 
 // shows edit or delete menu 
@@ -427,7 +523,7 @@ function showEditDelMenu(k, h){
     var getInput = document.getElementById(h);
     if(getInput.checked){
         // hide edit delete menu bar
-        getlist.style.display = "none"
+        getlist.style.display = "none";
     }else{
          getlist.style.display = "block";
     }
@@ -436,14 +532,14 @@ function showEditDelMenu(k, h){
 // edit specific task 
 
 function edit(e, m){
-    var getTask = document.getElementById(e)
+    var getTask = document.getElementById(e);
     var getInput = document.getElementById("todo");
     getInput.focus();
     getInput.value = getTask.innerText;
     var getaddTask = document.getElementById("addTask");
-    getaddTask.setAttribute("onclick", "addTask('" + e + "')")
+    getaddTask.setAttribute("onclick", "addTask('" + e + "')");
     var getList = document.getElementById(m);
-    getList.style.display = "none"
+    getList.style.display = "none";
 }
 
 // delete specific task
@@ -451,7 +547,7 @@ function edit(e, m){
 function deleteTask(d){
     var serialNumber = 1;
     var getTaskBody = document.getElementById(d);
-    getTaskBody.remove()
+    getTaskBody.remove();
     var getTaskBodyParent = document.getElementById("task-bar-menu");
     var gh = getTaskBodyParent.children;
 
@@ -467,11 +563,13 @@ function deleteTask(d){
 var getbottomData = document.getElementById("bottom-Data");
 var getCompletedData = document.getElementById("completed-Data");
 var getPendingData = document.getElementById("pending-Data");
+var getProgressData = document.getElementById("progress-Data");
 
 function showCompletedTask(){
     getCompletedData.style.display = "block";
     getbottomData.setAttribute("style", "display: none !important");
-    getPendingData.setAttribute("style", "display: none !important")
+    getPendingData.setAttribute("style", "display: none !important");
+    getProgressData.setAttribute("style", "display: none !important");
 }
 
 // shows all tasks
@@ -479,7 +577,8 @@ function showCompletedTask(){
 function showAllTask(){
     getbottomData.setAttribute("style", "display: block");
     getCompletedData.setAttribute("style", "display: none !important");
-    getPendingData.setAttribute("style", "display: none !important")
+    getPendingData.setAttribute("style", "display: none !important");
+    getProgressData.setAttribute("style", "display: none !important");
 }
 
 // shows pendings tasks
@@ -488,4 +587,15 @@ function showPendingTask(){
     getPendingData.setAttribute("style", "display: block");
     getCompletedData.setAttribute("style", "display: none !important");
     getbottomData.setAttribute("style", "display: none !important");
+    getProgressData.setAttribute("style", "display: none !important");
+}
+
+// show progress
+
+function showProgress(){
+    getProgressData.setAttribute("style", "display: block !important ");
+    getCompletedData.setAttribute("style", "display: none !important");
+    getbottomData.setAttribute("style", "display: none !important");
+    getPendingData.setAttribute("style", "display: none !important");
+    console.log(getProgressData)
 }
